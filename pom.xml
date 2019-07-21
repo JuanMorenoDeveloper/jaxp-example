@@ -19,6 +19,7 @@
         <dom4j.version>2.1.1</dom4j.version>
         <jaxen.version>1.2.0</jaxen.version>
         <joox.version>1.6.2</joox.version>
+        <jmh.version>1.21</jmh.version>
     </properties>
 
     <dependencies>
@@ -36,6 +37,16 @@
             <groupId>org.jooq</groupId>
             <artifactId>joox-java-6</artifactId>
             <version>${joox.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-core</artifactId>
+            <version>${jmh.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjdk.jmh</groupId>
+            <artifactId>jmh-generator-annprocess</artifactId>
+            <version>${jmh.version}</version>
         </dependency>
 
         <dependency>

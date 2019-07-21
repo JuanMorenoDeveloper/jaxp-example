@@ -11,17 +11,17 @@ import java.io.IOException;
 
 import static org.joox.JOOX.$;
 
-class JooxTransformer {
+public class JooxTransformer {
 
     private final Document input;
 
-    JooxTransformer(String resourcePath) throws SAXException, IOException {
+    public JooxTransformer(String resourcePath) throws SAXException, IOException {
         // 1- Build the doc from the XML file
         DocumentBuilder builder = JOOX.builder();
         input = builder.parse(resourcePath);
     }
 
-    String modifyAttribute(String attribute, String oldValue, String newValue) throws TransformerFactoryConfigurationError {
+    public String modifyAttribute(String attribute, String oldValue, String newValue) throws TransformerFactoryConfigurationError {
         // 2- Select the document
         Match $ = $(input);
         // 3 - Find node to modify

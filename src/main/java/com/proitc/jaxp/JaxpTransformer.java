@@ -19,10 +19,10 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 
-class JaxpTransformer {
+public class JaxpTransformer {
     private final Document input;
 
-    JaxpTransformer(String resourcePath) throws SAXException, IOException, ParserConfigurationException {
+    public JaxpTransformer(String resourcePath) throws SAXException, IOException, ParserConfigurationException {
         // 1- Build the doc from the XML file
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
@@ -31,7 +31,7 @@ class JaxpTransformer {
           .parse(resourcePath);
     }
 
-    String modifyAttribute(String attribute, String oldValue, String newValue) throws XPathExpressionException, TransformerFactoryConfigurationError, TransformerException {
+    public String modifyAttribute(String attribute, String oldValue, String newValue) throws XPathExpressionException, TransformerFactoryConfigurationError, TransformerException {
         // 2- Locate the node(s) with xpath
         XPath xpath = XPathFactory
           .newInstance()

@@ -14,16 +14,16 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.util.List;
 
-class Dom4jTransformer {
+public class Dom4jTransformer {
     private final Document input;
 
-    Dom4jTransformer(String resourcePath) throws DocumentException {
+    public Dom4jTransformer(String resourcePath) throws DocumentException {
         // 1- Build the doc from the XML file
         SAXReader xmlReader = new SAXReader();
         this.input = xmlReader.read(resourcePath);
     }
 
-    String modifyAttribute(String attribute, String oldValue, String newValue) throws TransformerException {
+    public String modifyAttribute(String attribute, String oldValue, String newValue) throws TransformerException {
         // 2- Locate the node(s) with xpath, we can use index and iterator too.
         String expr = String.format("//*[contains(@%s, '%s')]", attribute, oldValue);
         XPath xpath = DocumentHelper.createXPath(expr);
