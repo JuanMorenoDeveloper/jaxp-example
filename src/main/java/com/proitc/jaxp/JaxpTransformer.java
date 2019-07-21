@@ -1,4 +1,4 @@
-package com.proitc;
+package com.proitc.jaxp;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -19,10 +19,10 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 
-public class JaxpTransformer {
-    private Document input;
+class JaxpTransformer {
+    private final Document input;
 
-    public JaxpTransformer(String resourcePath) throws SAXException, IOException, ParserConfigurationException {
+    JaxpTransformer(String resourcePath) throws SAXException, IOException, ParserConfigurationException {
         // 1- Build the doc from the XML file
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);
@@ -31,7 +31,7 @@ public class JaxpTransformer {
           .parse(resourcePath);
     }
 
-    public String modifyAttribute(String attribute, String oldValue, String newValue) throws XPathExpressionException, TransformerFactoryConfigurationError, TransformerException {
+    String modifyAttribute(String attribute, String oldValue, String newValue) throws XPathExpressionException, TransformerFactoryConfigurationError, TransformerException {
         // 2- Locate the node(s) with xpath
         XPath xpath = XPathFactory
           .newInstance()
@@ -43,6 +43,11 @@ public class JaxpTransformer {
             Element value = (Element) nodes.item(i);
             value.setAttribute(attribute, newValue);
         }
+        //Stream api syntax
+        //        IntStream
+        //          .range(0, nodes.getLength())
+        //          .mapToObj(i -> (Element) nodes.item(i))
+        //          .forEach(value -> value.setAttribute(attribute, newValue));
         // 4- Save the result to a new XML doc
         TransformerFactory factory = TransformerFactory.newInstance();
         factory.setFeature(XMLConstants.FEATURE_SECURE_PROCESSING, true);

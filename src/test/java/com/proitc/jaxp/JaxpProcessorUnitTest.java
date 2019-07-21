@@ -1,4 +1,4 @@
-package com.proitc;
+package com.proitc.jaxp;
 
 import org.junit.jupiter.api.Test;
 import org.xml.sax.SAXException;
@@ -15,7 +15,7 @@ import java.nio.file.Paths;
 import static org.xmlunit.assertj.XmlAssert.assertThat;
 
 /**
- * Unit test for simple JaxpTransformer.
+ * Unit test for simple {@link JaxpTransformer}.
  */
 public class JaxpProcessorUnitTest {
 
