@@ -1,4 +1,4 @@
-# JAXP-EXAMPLE
+# Modify XML attribute with Java example 
 [![Build Status](https://travis-ci.org/earth001/jaxp-example.svg?branch=master)](https://travis-ci.org/earth001/jaxp-example)
 
 ## Comparison between XML libraries in order to modify attributes
