@@ -55,6 +55,7 @@ public class JaxpTransformer {
         xformer.setOutputProperty(OutputKeys.INDENT, "yes");
         Writer output = new StringWriter();
         xformer.transform(new DOMSource(input), new StreamResult(output));
-        return output.toString();
+        return output.toString().replaceAll("[\r\n]+", "\n");
+        //These replace is need it only in Java 8+, see https://bugs.openjdk.java.net/browse/JDK-8215543
     }
 }

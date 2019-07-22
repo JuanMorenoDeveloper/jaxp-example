@@ -33,6 +33,7 @@ public class JooxTransformer {
           .stream()
           .forEach(e -> e.setAttribute(attribute, newValue));
         // 4- Return result as String
-        return $.toString();
+        return $.toString().replaceAll("[\r\n]+", "\n");
+        //These replace is need it only in Java 8+, see https://bugs.openjdk.java.net/browse/JDK-8215543
     }
 }
