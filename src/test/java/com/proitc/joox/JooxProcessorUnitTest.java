@@ -42,9 +42,10 @@ public class JooxProcessorUnitTest {
         String newValue = "false";
         String expectedXml = new String(Files.readAllBytes((Paths.get(getClass()
           .getResource("/xml/attribute_expected.xml")
-          .toURI()))));
+          .toURI())))).replaceAll("[\r\n]+", "\n");
+        //These replace is need it only in Java 8+, see https://bugs.openjdk.java.net/browse/JDK-8215543;
 
-        String result = transformer.modifyAttribute(attribute, oldValue, newValue);
+        String result = transformer.modifyAttribute(attribute, oldValue, newValue).replaceAll("[\r\n]+", "\n");
 
         assertThat(result)
           .and(expectedXml)
