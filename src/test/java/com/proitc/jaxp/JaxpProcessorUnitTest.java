@@ -11,7 +11,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import org.xml.sax.SAXParseException;
 
+import static org.assertj.core.api.Assertions.assertThatThrownBy;
 import static org.xmlunit.assertj.XmlAssert.assertThat;
 
 /**
@@ -53,6 +55,18 @@ public class JaxpProcessorUnitTest {
         assertThat(result)
           .and(expectedXml)
           .areSimilar();
+    }
+
+    @Test
+    public void givenXmlXee_whenInit_thenThrowException() throws IOException, SAXException, ParserConfigurationException, XPathExpressionException, TransformerFactoryConfigurationError, TransformerException {
+        String path = getClass().getResource("/xml/xee_attribute.xml")
+            .toString();
+
+        assertThatThrownBy(() -> {
+
+            new JaxpTransformer(path);
+
+        }).isInstanceOf(SAXParseException.class);
     }
 
 }

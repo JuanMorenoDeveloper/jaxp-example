@@ -31,7 +31,7 @@ public class AttributeBenchMark {
     }
 
     @Benchmark
-    public String dom4jBenchmark() throws DocumentException, TransformerException {
+    public String dom4jBenchmark() throws DocumentException, TransformerException, SAXException {
         String path = getClass()
           .getResource("/xml/attribute.xml")
           .toString();

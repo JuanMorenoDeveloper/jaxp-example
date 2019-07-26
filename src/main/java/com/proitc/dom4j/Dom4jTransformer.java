@@ -13,13 +13,17 @@ import javax.xml.transform.stream.StreamResult;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.List;
+import org.xml.sax.SAXException;
 
 public class Dom4jTransformer {
     private final Document input;
 
-    public Dom4jTransformer(String resourcePath) throws DocumentException {
+    public Dom4jTransformer(String resourcePath) throws DocumentException, SAXException {
         // 1- Build the doc from the XML file
         SAXReader xmlReader = new SAXReader();
+        xmlReader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+        xmlReader.setFeature("http://xml.org/sax/features/external-general-entities", false);
+        xmlReader.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
         this.input = xmlReader.read(resourcePath);
     }
 
