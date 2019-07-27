@@ -47,10 +47,10 @@ public class JaxpProcessorUnitTest {
         String newValue = "false";
         String expectedXml = new String(Files.readAllBytes((Paths.get(getClass()
           .getResource("/xml/attribute_expected.xml")
-          .toURI())))).replaceAll("(?m)^[ \t]*\r?\n", "");
-        //This replace is need it only in Java 8+, see https://bugs.openjdk.java.net/browse/JDK-8215543
+          .toURI()))));
 
         String result = transformer.modifyAttribute(attribute, oldValue, newValue).replaceAll("(?m)^[ \t]*\r?\n", "");
+        //This replace is need it only in Java 8+, see https://bugs.openjdk.java.net/browse/JDK-8215543
 
         assertThat(result)
           .and(expectedXml)
