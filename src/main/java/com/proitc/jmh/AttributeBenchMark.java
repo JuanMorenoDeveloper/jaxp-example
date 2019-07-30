@@ -35,7 +35,7 @@ public class AttributeBenchMark {
         String path = getClass()
           .getResource("/xml/attribute.xml")
           .toString();
-        Dom4jTransformer transformer = new Dom4jTransformer(path);
+        Dom4jTransformer transformer = new Dom4jTransformer(path, true);
         String attribute = "customer";
         String oldValue = "true";
         String newValue = "false";

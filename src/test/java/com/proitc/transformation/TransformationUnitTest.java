@@ -11,6 +11,8 @@ import javax.xml.transform.stream.StreamSource;
 import java.io.IOException;
 import java.io.StringReader;
 import java.io.StringWriter;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
@@ -19,10 +21,10 @@ import static org.xmlunit.assertj.XmlAssert.assertThat;
 public class TransformationUnitTest {
 
     @Test
-    public void givenXML_whenTransform_theGetSameXML() throws TransformerException, IOException {
-        String path = getClass()
+    public void givenXML_whenTransform_theGetSameXML() throws TransformerException, IOException, URISyntaxException {
+        URI path = getClass()
           .getResource("/xml/simplecdata.xml")
-          .getFile();
+          .toURI();
         String input = new String(Files.readAllBytes(Paths.get(path)));
 
         StreamSource source = new StreamSource(new StringReader(input));

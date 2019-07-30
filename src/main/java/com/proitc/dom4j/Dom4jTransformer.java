@@ -2,7 +2,9 @@ package com.proitc.dom4j;
 
 import org.dom4j.*;
 import org.dom4j.io.DocumentSource;
+import org.dom4j.io.HTMLWriter;
 import org.dom4j.io.SAXReader;
+import org.xml.sax.SAXException;
 
 import javax.xml.XMLConstants;
 import javax.xml.transform.OutputKeys;
@@ -10,20 +12,22 @@ import javax.xml.transform.Transformer;
 import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
+import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.util.List;
-import org.xml.sax.SAXException;
 
 public class Dom4jTransformer {
     private final Document input;
 
-    public Dom4jTransformer(String resourcePath) throws DocumentException, SAXException {
+    public Dom4jTransformer(String resourcePath, boolean secure) throws DocumentException, SAXException {
         // 1- Build the doc from the XML file
         SAXReader xmlReader = new SAXReader();
-        xmlReader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
-        xmlReader.setFeature("http://xml.org/sax/features/external-general-entities", false);
-        xmlReader.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+        if (secure) {
+            xmlReader.setFeature("http://apache.org/xml/features/disallow-doctype-decl", true);
+            xmlReader.setFeature("http://xml.org/sax/features/external-general-entities", false);
+            xmlReader.setFeature("http://xml.org/sax/features/external-parameter-entities", false);
+        }
         this.input = xmlReader.read(resourcePath);
     }
 
@@ -45,5 +49,12 @@ public class Dom4jTransformer {
         Writer output = new StringWriter();
         xformer.transform(new DocumentSource(input), new StreamResult(output));
         return output.toString();
+    }
+
+    public String asHTML() throws IOException {
+        StringWriter buffer = new StringWriter();
+        HTMLWriter writer = new HTMLWriter(buffer);
+        writer.write(input);
+        return buffer.toString();
     }
 }
